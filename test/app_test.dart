@@ -4,6 +4,8 @@ import 'package:test/test.dart';
 import 'package:first_app_10164507119/app_component.dart';
 import 'package:first_app_10164507119/app_component.template.dart' as ng;
 
+import '../lib/app_component.dart';
+
 void main() {
   final testBed =
       NgTestBed.forComponent<AppComponent>(ng.AppComponentNgFactory);
