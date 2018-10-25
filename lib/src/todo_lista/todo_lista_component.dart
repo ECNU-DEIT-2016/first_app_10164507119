@@ -10,7 +10,7 @@ import 'todo_lista_service.dart';
   selector: 'todo-lista',
   styleUrls: ['todo_lista_component.css'],
   templateUrl: 'todo_lista_component.html',
-  directives: [
+  directives: [                                    //页面内容
     MaterialCheckboxComponent,
     MaterialFabComponent,
     MaterialIconComponent,
@@ -20,7 +20,7 @@ import 'todo_lista_service.dart';
   ],
   providers: [const ClassProvider(TodoListaService)],
 )
-class TodoListaComponent implements OnInit {
+class TodoListaComponent implements OnInit {       //定义另一个todo-list              
   final TodoListaService todoListaService;
 
   List<String> items = [];
