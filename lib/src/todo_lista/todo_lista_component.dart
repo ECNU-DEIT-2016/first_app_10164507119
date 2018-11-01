@@ -20,7 +20,7 @@ import 'todo_lista_service.dart';
   ],
   providers: [const ClassProvider(TodoListaService)],
 )
-class TodoListaComponent implements OnInit {       //定义另一个todo-list              
+class TodoListaComponent implements OnInit {       //试一试吧              
   final TodoListaService todoListaService;
 
   List<String> items = [];
