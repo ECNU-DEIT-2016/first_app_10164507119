@@ -1,9 +1,18 @@
 
 <!-- Components info: https://webdev.dartlang.org/components -->
 
+<div class="widgets">
+  <div>
+    <input type="text" id="inputName" maxlength="15">
+  </div>
+</div>
 
-<div id="number">请开始点名</div>
+<div class="widgets">
+    <button id="generateButton">点名</button>
+</div>
+
+<div> <material-button  raised (trigger)="randomname()">开始点名</material-button></div>
+<div id="number">随机点名</div>
 <div id="name"></div>
 <div id="counter"></div>
 
-<div> <material-button  raised (trigger)="randomname()">开始点名</material-button></div>

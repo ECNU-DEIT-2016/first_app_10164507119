@@ -4,6 +4,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
 import 'random_service.dart';
+import 'dart:math';
 
 @Component(
   selector: 'random',
@@ -13,19 +14,22 @@ import 'random_service.dart';
     MaterialButtonComponent,
     MaterialInputComponent,
     NgFor,
+    NgIf，
+    coreDirectives，
   ],
   
   providers: [const ClassProvider(RandomtService)],
 )
 
+
 class RandomComponent implements OnInit {
-  RandomService RandomService;
+  final RandomComponent RandomService;
+  
   List<String> items = [];
-  String newTodo = '';
+  String newRandom = ' ';
+  var list=[0,0,0,0,0,0,0,0,0,0,0,0,0]; 
 
-  RandomComponent(this.RandomService);
-
-
+  var time=0;
   var namelist ={
     0:'小龙',
     1:'小吴',
@@ -40,9 +44,23 @@ class RandomComponent implements OnInit {
     10:'小赵',
     11:'小朱',
   };
+ 
+ RandomComponent(this.RandomService)
 
-  var counter=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-  var record="";
+ @override
+ Future<Null> ngOnlnit()async {
+   items = =await RandomService.getRandom();
+
+ }
+
+ void mian(){
+   querySelector('#inputNum").onInput.listen(updateBadge);
+
+ }
+
+ void updateBadge(Event e) {
+   String inputNum = (e.target as InputElement).value;
+ }
 
  void randomname(){
    Random random = new Random();
@@ -56,6 +74,4 @@ class RandomComponent implements OnInit {
     String times=list[number].toString();
     querySelector('#counter').text=namelist[number]+'同学已经被点名'+times+'次';
   }
-
-
-  }
+}
