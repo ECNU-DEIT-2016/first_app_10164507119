@@ -23,7 +23,7 @@ import 'dart:math';
 
 
 class RandomComponent implements OnInit {
-  final RandomComponent RandomService;
+  final RandomServicet RandomService;
   
   List<String> items = [];
   String newRandom = ' ';
@@ -45,11 +45,11 @@ class RandomComponent implements OnInit {
     11:'小朱',
   };
  
- RandomComponent(this.RandomService)
+ RandomComponent(this.randomService)
 
  @override
  Future<Null> ngOnlnit()async {
-   items = =await RandomService.getRandom();
+   items = await randomService.getRandom();
 
  }
 
