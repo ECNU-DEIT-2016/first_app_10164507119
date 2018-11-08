@@ -1,10 +1,13 @@
 import 'dart:async';
-import 'dart:html';
+
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-
+import 'dart:html';
 import 'random_service.dart';
 import 'dart:math';
+
+ButtonElement genButton;
+ButtonElement replayBtn;
 
 @Component(
   selector: 'random',
@@ -17,13 +20,12 @@ import 'dart:math';
     NgIf，
     coreDirectives，
   ],
-  
-  providers: [const ClassProvider(RandomtService)],
+  providers: [const ClassProvider(RandomService)],
 )
 
 
 class RandomComponent implements OnInit {
-  final RandomServicet RandomService;
+  final RandomService randomService;
   
   List<String> items = [];
   String newRandom = ' ';
@@ -48,18 +50,51 @@ class RandomComponent implements OnInit {
  RandomComponent(this.randomService)
 
  @override
- Future<Null> ngOnlnit()async {
+ Future<Null> ngOnInit()async {
    items = await randomService.getRandom();
 
  }
 
  void mian(){
-   querySelector('#inputNum").onInput.listen(updateBadge);
-
+   querySelector('#inputNum').onInput.listen(updateBadge);
+   genButton = querySelector('#generateButton');
+   genButton.onClick.listen(generateBadge);
+   replayBtn = querySelector('#generateButton');
+   replayBtn.onClick.listen(generateBadge);
  }
 
- void updateBadge(Event e) {
+void generateBadge(Event e) {
+  setBadgeNum('1,2,3,4,5,6,7,8,9,10,11,12');
+}
+
+void setBadgeNum(String newName) {
+querySelector('#badgeName').text = newName;
+}
+
+voidreplayBadge(Event e) {
+  genButton.disabled = true;
+  replayBtn.disabled = false;
+
+  resetRandomname();
+}
+
+void resetRandomname(){
+  querySelector('#number').text='学号：'+' ';
+    querySelector('#name').text='名字：'+' ';
+
+}
+
+
+void updateBadge(Event e) {
    String inputNum = (e.target as InputElement).value;
+   setBadgeNum(inputNum);
+   if (inputNum.trim().isEmpty) {
+    genButton..disabled = false
+             ..text = '请输入要点名的人数！';
+  } else {
+    genButton..disabled = true
+             ..text = '请输入要点名的人数！';
+  }
  }
 
  void randomname(){
