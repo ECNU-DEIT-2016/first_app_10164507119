@@ -4,21 +4,14 @@
 <div class="widgets">
   <div>
     <input label="请输入你想要点名的人数" type="text" id="inputName" maxlength="15">
-  </div>
-  <div>
     <button id="generateButton">确定</button>
-  </div>
-  <div>
     <button id="relayBtn">重置</button>
   </div>
 </div>
-
-<div >
-    <button id="generateButton">点名</button>
-</div>
+ 
 
 <div> <material-button  raised (trigger)="resetRandomname()">重置</material-button></div>
-<div> <material-button  raised (trigger)="randomname()">开始点名</material-button></div>
+<div></div> <material-button  raised (trigger)="randomname()">开始点名</material-button></div>
 <div id="number">随机点名</div>
 <div id="name"></div>
 <div id="counter"></div>

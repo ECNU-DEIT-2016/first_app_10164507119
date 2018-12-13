@@ -39,46 +39,17 @@ class MyServerChannel extends ApplicationChannel {
   }
 }
 
-class RandomController extends ResourceController {
-  //final List<String> things = ['thing1', 'thing2'];
-   List<String> names = [];
 
 
-
-  @Operation.get()
-  Future<Response> getThings() async {
-    //return Response.ok(names);
-      await connect(names);
-    int R=getRandom();
-    return Response.ok(names[R]);
-  }
-
-  List<int> getRandom(int num, int maxlen){
-    List<int> nums=[];
-     Random random = new Random();
-     for(int i=0; i<num; i++){
-       int rand = random.nextInt(maxlen);
-       if(nums.contains(rand)){
-         i--;
-       }else{
-         nums.add(rand);
-       }
-     }   
-      return nums;
-  }
-
-}
 
 class MyController extends ResourceController {
   //final List<String> things = ['thing1', 'thing2'];
    List<String> names = [];
 
-   MyController(){
-    connect(names);
-   }
 
   @Operation.get()
   Future<Response> getThings() async {
+    await connect(names);
     return Response.ok(names);
   }
 
@@ -91,19 +62,44 @@ class MyController extends ResourceController {
     }
     return Response.ok(names[id]);
   }
+}
 
+class RandomController extends ResourceController {
+  //final List<String> things = ['thing1', 'thing2'];
+   List<String> names = [];
+
+
+   @Operation.get()
+  Future<Response> getThings() async {
+    
+    await connect(names);
+    int ran=getRandom();
+    return Response.ok(names[ran]);
+  }
+
+
+ int getRandom(){
+    
+     Random random = new Random();
+     
+     int rand = random.nextInt(13);
+     
+     return rand;
+  }
+
+}
 
   Future connect(List<String> names) async{
   var s = ConnectionSettings(
-    user: "root",
-    password: "081724",
-    host: "localhost",
+    user: "deit2016",
+    password: "deit2016@ecnu",
+    host: "www.muedu.org",
     port: 3306,
-    db: "example",
+    db: "deit2016db_10164507119",
   );
   var conn = await MySqlConnection.connect(s);
   Results result =
-      await conn.execute('SELECT id,name FROM student');
+      await conn.execute('SELECT id,name FROM slist');
   result.forEach( (f) => names.add(f.toString()) );
 }
-}
+

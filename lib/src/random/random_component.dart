@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'dart:html';
+
 import 'random_service.dart';
+import 'dart:html';
 import 'dart:math';
 
 ButtonElement genButton;
@@ -17,12 +18,11 @@ ButtonElement replayBtn;
     MaterialButtonComponent,
     MaterialInputComponent,
     NgFor,
-    NgIf，
-    coreDirectives，
+    NgIf,
+   coreDirectives,
   ],
   providers: [const ClassProvider(RandomService)],
 )
-
 
 class RandomComponent implements OnInit {
   final RandomService randomService;
@@ -46,16 +46,30 @@ class RandomComponent implements OnInit {
     10:'小赵',
     11:'小朱',
   };
- 
- RandomComponent(this.randomService)
 
+  RandomComponent(this.randomService);
+  
  @override
  Future<Null> ngOnInit()async {
    items = await randomService.getRandom();
 
  }
 
- void mian(){
+
+ void randomname(){
+   Random random = new Random();
+   var number = random.nextInt(13);
+   
+    var id=number+1;
+    String snumber=id.toString();
+    querySelector('#number').text='学号：'+snumber;
+    querySelector('#name').text='名字：'+namelist[number];
+    list[number]++;
+    String times=list[number].toString();
+    querySelector('#counter').text=namelist[number]+'同学已经被点名'+times+'次';
+  }
+
+  void mian(){
    querySelector('#inputNum').onInput.listen(updateBadge);
    genButton = querySelector('#generateButton');
    genButton.onClick.listen(generateBadge);
@@ -84,7 +98,6 @@ void resetRandomname(){
 
 }
 
-
 void updateBadge(Event e) {
    String inputNum = (e.target as InputElement).value;
    setBadgeNum(inputNum);
@@ -95,18 +108,6 @@ void updateBadge(Event e) {
     genButton..disabled = true
              ..text = '请输入要点名的人数！';
   }
- }
+}
 
- void randomname(){
-   Random random = new Random();
-   var number = random.nextInt(13);
-   
-    var id=number+1;
-    String snumber=id.toString();
-    querySelector('#number').text='学号：'+snumber;
-    querySelector('#name').text='名字：'+namelist[number];
-    list[number]++;
-    String times=list[number].toString();
-    querySelector('#counter').text=namelist[number]+'同学已经被点名'+times+'次';
-  }
 }
